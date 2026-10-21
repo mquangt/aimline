@@ -6,6 +6,7 @@
   "description": "AR shot tracer and aim suggestion from your dispersion data",
   "scripts": {
     "dev": "node prototype/serve.mjs 5173",
-    "test": "node --test prototype/tests/*.test.mjs"
+    "test": "node --test prototype/tests/*.test.mjs",
+    "deploy": "git push origin main && git subtree split --prefix prototype -b gh-pages && git push origin gh-pages"
   }
 }

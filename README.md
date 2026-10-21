@@ -32,11 +32,9 @@ npm test
 
 ### On your iPhone
 
-Camera and motion sensors only work over **HTTPS**. Pick one of these:
+Live build (HTTPS, GitHub Pages): **https://mquangt.github.io/aimline/**
 
-- **Netlify Drop (no account CLI):** open https://app.netlify.com/drop and drag the `prototype/` folder in. Open the URL it gives you in Safari.
-- **GitHub Pages:** push the repo, enable Pages, serve the `prototype/` folder.
-- **Tunnel from this PC:** run `npm run dev`, then in a second terminal run `npx localtunnel --port 5173` and open the printed URL on the phone.
+Camera and motion sensors only work over HTTPS. To publish changes, commit them and run `npm run deploy`: it pushes `main`, then pushes the `prototype/` folder to the `gh-pages` branch, and Pages rebuilds in about a minute.
 
 On the phone: tap **Start camera AR**, allow Motion & Orientation and the camera, stand behind your ball, point at your target and tap **Set target here**. Set the distance with the slider. Calibrate in the bag menu (sliders icon) if the tracer doesn't line up with the real horizon: **Camera FOV** scales the overlay, **Eye height** moves the ground.
 
