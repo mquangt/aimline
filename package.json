@@ -1,0 +1,11 @@
+{
+  "name": "aimline",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AR shot tracer and aim suggestion from your dispersion data",
+  "scripts": {
+    "dev": "node prototype/serve.mjs 5173",
+    "test": "node --test prototype/tests/*.test.mjs"
+  }
+}

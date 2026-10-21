@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0b1510">
+<title>AimLine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<video id="video" playsinline muted autoplay></video>
+<canvas id="overlay"></canvas>
+
+<!-- Start screen -->
+<section id="start" class="start">
+  <div class="start-card">
+    <p class="eyebrow">AimLine · prototype</p>
+    <h1>See the shot before you hit it.</h1>
+    <p class="lede">Raise your phone on the tee. AimLine draws your real ball flight for the club in your hand and moves the aim line to cover your usual miss.</p>
+    <div class="start-actions">
+      <button id="btn-ar" class="btn primary">Start camera AR</button>
+      <button id="btn-sim" class="btn">Try the demo hole</button>
+    </div>
+    <p id="start-error" class="error" hidden></p>
+    <p class="fine">Camera AR needs HTTPS, the rear camera, and motion access. Using the bag's sample numbers until you enter your own.</p>
+  </div>
+</section>
+
+<!-- HUD -->
+<header id="hud" class="hud" hidden>
+  <div class="hud-row">
+    <div class="club-readout">
+      <span id="hud-club" class="club-name">Driver</span>
+      <span id="hud-stats" class="club-stats">220 carry · 90 ft · 240 total</span>
+    </div>
+    <div class="chips">
+      <span id="chip-mode" class="chip">DEMO</span>
+      <button id="btn-view" class="chip chip-btn" hidden>EYE LEVEL</button>
+      <span id="chip-heading" class="chip mono">000°</span>
+      <button id="btn-settings" class="icon-btn" aria-label="Bag and settings">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M4 6h10a2.5 2.5 0 0 1 5 0h1v2h-1a2.5 2.5 0 0 1-5 0H4zm0 10h2a2.5 2.5 0 0 1 5 0h9v2h-9a2.5 2.5 0 0 1-5 0H4z"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="tip" class="tip">
+    <div class="tip-aim">
+      <span id="tip-aim-big" class="aim-big">2.4° L</span>
+      <span id="tip-aim-sub" class="aim-sub">10 yds left of target</span>
+    </div>
+    <ul id="tip-lines" class="tip-lines"></ul>
+    <button id="tip-club" class="tip-club" hidden></button>
+  </div>
+</header>
+
+<!-- Controls -->
+<footer id="controls" class="controls" hidden>
+  <div class="shape-row" role="radiogroup" aria-label="Shot shape" id="shapes"></div>
+  <div class="club-row" id="clubs" role="radiogroup" aria-label="Club"></div>
+  <div class="target-row">
+    <button id="btn-target" class="btn primary small">Set target here</button>
+    <label class="dist">
+      <span class="dist-label">Target <b id="dist-val">238</b> yds</span>
+      <input id="dist" type="range" min="30" max="330" step="1" value="238">
+    </label>
+  </div>
+  <div class="toggle-row">
+    <label class="toggle"><input id="tg-ghost" type="checkbox" checked> Show typical miss</label>
+    <label class="toggle"><input id="tg-zone" type="checkbox" checked> Landing zone</label>
+    <label class="toggle"><input id="tg-bias" type="checkbox" checked> Include my bias</label>
+  </div>
+</footer>
+
+<div id="reticle" class="reticle" hidden></div>
+<p id="hint" class="hint" hidden>Drag to look around · tap the ground to set a target</p>
+
+<!-- Settings / bag editor -->
+<dialog id="settings" class="sheet">
+  <form method="dialog" class="sheet-inner">
+    <div class="sheet-head">
+      <h2>Your bag</h2>
+      <button class="btn small" value="close">Done</button>
+    </div>
+    <p class="fine">Enter averages from Arccos or 18Birdies. Bias is your average miss left (−) or right (+) of the target line in yards; spread is one standard deviation.</p>
+    <div class="table-wrap">
+      <table class="bag">
+        <thead><tr><th>Club</th><th>Carry</th><th>Apex ft</th><th>Roll</th><th>Bias ±</th><th>Lat σ</th><th>Carry σ</th></tr></thead>
+        <tbody id="bag-body"></tbody>
+      </table>
+    </div>
+    <div class="settings-grid">
+      <label>Handedness
+        <select id="set-hand"><option value="R">Right-handed</option><option value="L">Left-handed</option></select>
+      </label>
+      <label>Camera FOV (vertical °)
+        <input id="set-fov" type="number" min="30" max="100" step="1">
+      </label>
+      <label>Eye height (yds)
+        <input id="set-eye" type="number" min="1" max="2.5" step="0.05">
+      </label>
+    </div>
+    <div class="sheet-foot">
+      <button id="btn-reset" class="btn small" type="button">Reset to sample bag</button>
+      <button id="btn-exit" class="btn small" type="button">Exit to start</button>
+    </div>
+  </form>
+</dialog>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
